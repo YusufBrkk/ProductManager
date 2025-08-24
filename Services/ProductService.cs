@@ -30,6 +30,9 @@ namespace Newproject.Services
                 return JsonSerializer.Deserialize<IEnumerable<ProductDTO>>(cachedProducts)!;
             }
 
+
+
+
             var products = await _productRepository.GetAllAsync();
             var productDtos = products.Select(p => new ProductDTO
             {
