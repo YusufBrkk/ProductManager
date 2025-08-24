@@ -55,4 +55,4 @@ Global hata yönetimi ile beklenmeyen hatalarda anlamlı bir JSON mesajı döner
 
 ---
 
-Herhangi bir sorunda bana ulaşabilirsiniz.
+Herhangi bir sorunda bana ulaşabilirsiniz. yusufbrkk42@gmail.com
