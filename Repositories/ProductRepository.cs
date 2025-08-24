@@ -40,5 +40,13 @@ namespace Newproject.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateAsync(Product product)
+        {
+            // Güncelleme işlemini burada yap
+            // Örneğin:
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+        }
     }
 }

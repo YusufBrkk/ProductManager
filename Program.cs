@@ -3,11 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using Newproject.Models;
 using Newproject.Repositories;
 using Newproject.Services;
+using StackExchange.Redis;
+using Serilog;
 
 // Swagger için gerekli using
 using Microsoft.OpenApi.Models;
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog'u DI container'a ekle
+builder.Host.UseSerilog();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -21,6 +30,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(); // Bu satır eklendi
 
+var redis = ConnectionMultiplexer.Connect("localhost:6379");
+builder.Services.AddSingleton<IConnectionMultiplexer>(redis);
 
 var app = builder.Build();
 

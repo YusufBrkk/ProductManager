@@ -18,22 +18,23 @@ Katmanlı mimari ile geliştirilmiş, Entity Framework Core ve MSSQL kullanan bi
    ```
    dotnet run
    ```
+6. Swagger arayüzü için: `http://localhost:5000/swagger`
+
+## Kullanılan Teknolojiler
+- ASP.NET Core Web API
+- Entity Framework Core
+- Redis
+- Serilog
+- Swagger
+- JWT Authentication
 
 ## API Endpointleri
-Swagger arayüzü ile tüm endpointleri test edebilirsiniz: `http://localhost:5100/swagger`
-
-### Ürün İşlemleri
-- **GET** `/api/Product` : Tüm ürünleri listeler
-- **GET** `/api/Product/{id}` : Id ile ürün getirir
-- **POST** `/api/Product` : Yeni ürün ekler
-  - Body örneği:
-    ```json
-    {
-      "name": "Ürün Adı",
-      "price": 100
-    }
-    ```
-- **DELETE** `/api/Product/{id}` : Id ile ürünü siler
+- **POST** `/api/auth/register`
+- **POST** `/api/auth/login`
+- **GET** `/api/product`
+- **POST** `/api/product`
+- **PUT** `/api/product`
+- **DELETE** `/api/product/{id}`
 
 ### Örnek WeatherForecast Endpointi
 - **GET** `/weatherforecast`

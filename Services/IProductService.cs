@@ -11,5 +11,6 @@ namespace Newproject.Services
         Task<ProductDTO> GetByIdAsync(int id);
         Task AddAsync(ProductDTO productDto);
         Task DeleteAsync(int id);
+        Task UpdateAsync(ProductDTO productDto);
     }
 }
