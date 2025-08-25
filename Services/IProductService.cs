@@ -8,7 +8,7 @@ namespace Newproject.Services
     public interface IProductService
     {
         Task<IEnumerable<ProductDTO>> GetAllAsync();
-        Task<ProductDTO> GetByIdAsync(int id);
+        Task<ProductDTO?> GetByIdAsync(int id); 
         Task AddAsync(ProductDTO productDto);
         Task DeleteAsync(int id);
         Task UpdateAsync(ProductDTO productDto);

@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using ProductApp.Application.Products.Commands;
+using ProductApp.Application.Products.Queries;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newproject.DTOs;
-using ProductApp.Application.Queries;
-using ProductApp.Application.Commands;
 
 namespace Newproject.Controllers
 {
@@ -13,31 +13,18 @@ namespace Newproject.Controllers
     [Authorize]
     public class ProductController : ControllerBase
     {
-        private readonly GetAllProductsQueryHandler _getAllHandler;
-        private readonly AddProductCommandHandler _addHandler;
-        private readonly GetProductByIdQueryHandler _getByIdHandler;
-        private readonly UpdateProductCommandHandler _updateHandler;
-        private readonly DeleteProductCommandHandler _deleteHandler;
+        private readonly IMediator _mediator;
 
-        public ProductController(
-            GetAllProductsQueryHandler getAllHandler,
-            AddProductCommandHandler addHandler,
-            GetProductByIdQueryHandler getByIdHandler,
-            UpdateProductCommandHandler updateHandler,
-            DeleteProductCommandHandler deleteHandler)
+        public ProductController(IMediator mediator)
         {
-            _getAllHandler = getAllHandler;
-            _addHandler = addHandler;
-            _getByIdHandler = getByIdHandler;
-            _updateHandler = updateHandler;
-            _deleteHandler = deleteHandler;
+            _mediator = mediator;
         }
 
         // GET: api/Product
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll()
         {
-            var products = await _getAllHandler.Handle();
+            var products = await _mediator.Send(new GetAllProductsQuery());
             return Ok(products);
         }
 
@@ -45,7 +32,7 @@ namespace Newproject.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetById(int id)
         {
-            var product = await _getByIdHandler.Handle(id);
+            var product = await _mediator.Send(new GetProductByIdQuery(id));
             if (product == null) return NotFound();
             return Ok(product);
         }
@@ -54,26 +41,27 @@ namespace Newproject.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(ProductDTO productDto)
         {
-            await _addHandler.Handle(productDto);
+            await _mediator.Send(new CreateProductCommand { /* map properties from productDto */ });
             return CreatedAtAction(nameof(GetAll), null);
         }
 
         // PUT: api/Product
-        [HttpPut]
-        public async Task<ActionResult> Update(ProductDTO productDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, UpdateProductCommand command)
         {
-            await _updateHandler.Handle(productDto);
+            command.Id = id;
+            var result = await _mediator.Send(command);
+            if (!result) return NotFound();
             return NoContent();
         }
 
         // DELETE: api/Product/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _deleteHandler.Handle(id);
+            var result = await _mediator.Send(new DeleteProductCommand(id));
+            if (!result) return NotFound();
             return NoContent();
         }
-
-        // Diğer CRUD işlemleri için benzer handler’lar ekleyebilirsin.
     }
 }

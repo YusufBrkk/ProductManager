@@ -1,15 +1,23 @@
-using Newproject.Services;
+using ProductApp.Application.DTOs;
+using ProductApp.Application.Interfaces;
+using ProductApp.Infrastructure.Persistence;
+using ProductApp.Infrastructure.Messaging;
+using ProductApp.Infrastructure.Caching;
+using Microsoft.EntityFrameworkCore;
 
-public class DeleteProductCommandHandler
+namespace ProductApp.Application.Commands
 {
-    private readonly IProductService _productService;
-    public DeleteProductCommandHandler(IProductService productService)
+    public class DeleteProductCommandHandler
     {
-        _productService = productService;
-    }
+        private readonly ProductApp.Application.Interfaces.IProductService _productService;
+        public DeleteProductCommandHandler(IProductService productService)
+        {
+            _productService = productService;
+        }
 
-    public async Task Handle(int id)
-    {
-        await _productService.DeleteAsync(id);
+        public async Task Handle(int id)
+        {
+            await _productService.DeleteAsync(id);
+        }
     }
 }

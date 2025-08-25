@@ -1,0 +1,7 @@
+services:
+  productapp.api:
+    image: [productapp.api](http://_vscodecontentref_/3)
+    environment:
+      - JWT_KEY=supersecretkey
+      - REDIS_HOST=redis:6379
+      - ASPNETCORE_URLS=http://+:5002

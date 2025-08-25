@@ -1,5 +1,9 @@
-using Newproject.DTOs;
-using Newproject.Services;
+using ProductApp.Application.DTOs;
+using ProductApp.Application.Interfaces;
+using ProductApp.Infrastructure.Persistence;
+using ProductApp.Infrastructure.Messaging;
+using ProductApp.Infrastructure.Caching;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProductApp.Application.Commands
 {

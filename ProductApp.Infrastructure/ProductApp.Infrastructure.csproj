@@ -2,7 +2,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProductApp.Core\ProductApp.Core.csproj" />
-    <ProjectReference Include="..\ProductApp.Application\ProductApp.Application.csproj" />
+    <ProjectReference Include="..\ProductApp.Domain\ProductApp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
+    <PackageReference Include="RabbitMQ.Client" Version="7.1.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.9.11" />
   </ItemGroup>
 
   <PropertyGroup>

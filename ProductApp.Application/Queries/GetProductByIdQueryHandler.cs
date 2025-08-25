@@ -1,5 +1,5 @@
-using Newproject.DTOs;
-using Newproject.Services;
+using ProductApp.Application.DTOs;
+using ProductApp.Application.Interfaces;
 
 public class GetProductByIdQueryHandler
 {

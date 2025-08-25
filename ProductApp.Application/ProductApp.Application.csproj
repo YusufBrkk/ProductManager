@@ -2,9 +2,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProductApp.Core\ProductApp.Core.csproj" />
+    <ProjectReference Include="..\ProductApp.Domain\ProductApp.Domain.csproj" />
+    <ProjectReference Include="..\ProductApp.Infrastructure\ProductApp.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.14.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
