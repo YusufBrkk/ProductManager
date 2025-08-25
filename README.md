@@ -1,24 +1,30 @@
 # Newproject
 
 ## Proje Hakkında
-Katmanlı mimari ile geliştirilmiş, Entity Framework Core ve MSSQL kullanan bir ASP.NET Core Web API örneği.
+Bu proje, .NET tabanlı mikroservis mimarisi ile geliştirilmiş bir backend uygulamasıdır.  
+Aşağıdaki servisleri içerir:
+- **AuthService:** Kimlik doğrulama ve yetkilendirme (JWT, Refresh Token, Microsoft Identity)
+- **ProductService:** Onion Architecture, CQRS, Redis cache, Event-Driven yapı, ürün işlemleri
+- **LogService:** Merkezi log toplama (Serilog/Seq/ELK)
+- **ApiGateway:** YARP ile merkezi kimlik doğrulama ve rate limiting
+
 
 ## Kurulum
-1. Bu repoyu klonlayın veya indirin.
-2. Gerekli NuGet paketlerini yükleyin:
-   ```
-   dotnet restore
-   ```
-3. Veritabanı bağlantı bilgisini `appsettings.json` dosyasında güncelleyin.
-4. Migration ve veritabanı oluşturmak için:
-   ```
-   dotnet ef database update
-   ```
-5. Uygulamayı başlatın:
-   ```
-   dotnet run
-   ```
-6. Swagger arayüzü için: `http://localhost:5000/swagger`
+1. Gerekli NuGet bağımlılıklarını yükleyin:
+    ```sh
+    dotnet restore
+    ```
+2. Projeyi build edin:
+    ```sh
+    dotnet build Newproject.sln
+    ```
+3. Her mikroservisi kendi klasöründen başlatın:
+    ```sh
+    dotnet run --project ./AuthService/AuthService.API.csproj
+    dotnet run --project ./ProductApp.API/ProductApp.API.csproj
+    dotnet run --project ./LogService.API/LogService.API.csproj
+    dotnet run --project ./ApiGateway/ApiGateway.csproj
+    ```
 
 ## Kullanılan Teknolojiler
 - ASP.NET Core Web API
